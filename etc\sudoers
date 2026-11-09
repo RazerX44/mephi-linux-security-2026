@@ -1,0 +1,27 @@
+Проверка времени в данный момент:
+┌──(kali㉿kali)-[~]
+└─$ date -s "2026-11-10 15:30:30"
+date: cannot set date: Operation not permitted
+Tue Nov 10 03:30:30 PM EST 2026
+
+┌──(kali㉿kali)-[~]
+└─$ sudo passwd user1
+New password:
+Retype new password:
+passwd: password updated successfully
+
+Настройка sudoers
+┌──(kali㉿kali)-[]
+└─$ sudo visudo
+Добавляем строку user1 ALL=(ALL) NOPASSWD: /bin/date в открывшийся файл и сохраняем
+┌──(kali㉿kali)-[]
+└─$ su - user1
+
+Проверка текущего времени
+Password:
+$ date
+Mon Nov 9 01:02:45 PM EST 2026
+
+Изменение времени и даты
+$ sudo date -s "2026-11-10 15:30:30"
+Tue Nov 10 03:30:30 PM EST 2026
