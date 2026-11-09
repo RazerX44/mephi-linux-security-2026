@@ -1,0 +1,58 @@
+┌──(kali㉿kali)-[~]
+└─$ history
+1
+2 sudo get update
+3 sudo update
+4 sudo apt-get update
+5 curl -fsS https://dl.brave.com/install.sh | sh
+6 sudo apt get update
+7 curl -fsS https://dl.brave.com/install.sh | sh
+8 sudo apt get install firefox
+9 sudo apt get install mozilla firefox
+10 sudo apt install mozilla firefox
+11 id
+12 touch file1
+13 ls -l faile1
+14 ls -l file1
+15 ls -l /etc/psswd
+16 ls -l /etc/passwd
+17 ps -o comm, uid
+18 ps -o comm,uid
+19 grep bash$ /etc/passwd |\nwhile IFS=: read user passwd uid gid name homedir shell \ndo\nprint "%16s: %s\n"\nUser "$user"\n Password "$passwd"\n "User ID" "$uid"\n "Group ID" "$gid"\n Name "$name"\n "Home directory" "$homedir"\n Shell "$shell"\nread < /dev/tty\ndone
+20 grep bash$ /etc/passwd |\nwhile IFS=: read user passwd uid gid name homedir shell \ndo\nprint "%16s: %s\n"\nUser "$user"\n Password "$passwd"\n "User ID" "$uid"\n "Group ID" "$gid"\n Name "$name"\n "Home directory" "$homedir"\n Shell "$shell"\nread < /dev/tty\ndone
+21 grep bash$ /etc/passwd |\nwhile IFS=: read user passwd uid gid name homedir shell \ndo\n print "%16s: %s\n"\n User "$user"\n Password "$passwd"\n "User ID" "$uid"\n "Group ID" "$gid"\n Name "$name"\n "Home directory" "$homedir"\n Shell "$shell"\read -p < /dev/tty\ndone
+22 grep bash$ /etc/passwd |\nwhile IFS=: read user passwd uid gid name homedir shell \ndo\n print "%16s: %s\n"\n User "$user"\n Password "$passwd"\n "User ID" "$uid"\n "Group ID" "$gid"\n Name "$name"\n "Home directory" "$homedir"\n Shell "$shell"\ read -p < /dev/tty\ndone
+23 grep bash$ /etc/passwd |\nwhile IFS=: read user passwd uid gid name homedir shell \ndo\n print "%16s: %s\n"\n User "$user"\n Password "$passwd"\n "User ID" "$uid"\n "Group ID" "$gid"\n Name "$name"\n "Home directory" "$homedir"\n Shell "$shell"\ read -p "Нажмите Энтер для следующего пользователя..." < /dev/tty\ndone
+24 sudo groupadd students
+25 sudo useradd -m -u 1234 -G students user1
+26 sudo passwd user1
+27 sudo chage -M 90 user1
+28 clear
+29 su -
+30 sudo passwd root
+31 su -
+32 cat etc/shadow
+33 cat /etc/shadow
+34 ls -l /etc/passwd
+35 cp /bin/cat ~/mycat
+36 ls -l ~/nycat
+37 ls -l ~/mycat
+38 sudo chown root ~/mycat
+39 sudo chmod u+s ~/mycat
+40 ls -l ~/mycat
+41 ~/mycat /etc/shadow
+42 touch /tmp/testfile
+43 chown root /tmp/testfile
+44 cp /bin/chown ~/mychown
+45 ls -l ~/mycat
+46 ls -l ~/mychown
+47 sudo setcap cap_chown+ep ~/mychown
+48 getcap ~/mychown
+49 touch /tmp/testfile2
+50 ~/mychown root /tmp/testfile2
+51 ls -l /tmp/testfile2
+52 date -s "2026-11-10 15:30:30"
+53 sudo passwd user1
+54 sudo visudo
+55 su - user1
+
