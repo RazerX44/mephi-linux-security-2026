@@ -1,0 +1,47 @@
+Выбранная утилита: chown
+
+──(kali㉿kali)-[~]
+└─$ touch /tmp/testfile
+
+┌──(kali㉿kali)-[~]
+└─$ chown root /tmp/testfile
+chown: changing ownership of '/tmp/testfile': Operation not permitted
+
+Копирование утилиты chown в домашнюю директорию
+┌──(kali㉿kali)-[~]
+└─$ cp /bin/chown ~/mychown
+
+┌──(kali㉿kali)-[~]
+└─$ ls -l ~/mycat
+-rwsr-xr-x 1 root kali 43936 Nov 9 12:17 /home/kali/mycat
+
+┌──(kali㉿kali)-[~]
+└─$ ls -l ~/mychown
+-rwxr-xr-x 1 kali kali 72704 Nov 9 12:48 /home/kali/mychown
+
+Установите capability CAP_CHOWN
+┌──(kali㉿kali)-[~]
+└─$ sudo setcap cap_chown+ep ~/mychown
+
+[sudo] password for kali:
+
+Проверка результата:
+┌──(kali㉿kali)-[~]
+└─$ getcap ~/mychown
+/home/kali/mychown cap_chown=ep
+
+Изменяем владельца файла:
+
+┌──(kali㉿kali)-[~]
+└─$ touch /tmp/testfile2
+
+┌──(kali㉿kali)-[~]
+└─$ ~/mychown root /tmp/testfile2
+
+┌──(kali㉿kali)-[~]
+└─$ ls -l /tmp/testfile2
+-rw-r--r-- 1 root kali 0 Nov 9 12:50 /tmp/testfile2
+
+┌──(kali㉿kali)-[~]
+└─$ getcap ~/mychown
+/home/kali/mychown cap_chown=ep
