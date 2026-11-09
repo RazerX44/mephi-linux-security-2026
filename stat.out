@@ -1,0 +1,132 @@
+3.1.Выбор утилиты и привилегированной операции
+
+Выбранная утилита: cat
+Привилегированная операция: чтение защищенного файла /etc/shadow. Файл доступен для чтения только пользователю "root".
+
+┌──(kali㉿kali)-[~]
+└─$ cat /etc/shadow
+cat: /etc/shadow: Permission denied
+
+Просмотр прав на файл:
+
+┌──(kali㉿kali)-[~]
+└─$ ls -l /etc/passwd
+-rw-r--r-- 1 root root 3109 Nov 9 05:22 /etc/passwd
+
+3.2 Выполнение привилегированной операции через set-UID
+
+Копирование утилиты cat в домашнюю директорию
+┌──(kali㉿kali)-[~]
+└─$ cp /bin/cat ~/mycat
+
+Проверка созданной копии
+
+┌──(kali㉿kali)-[~]
+└─$ ls -l ~/mycat
+-rwxr-xr-x 1 kali kali 43936 Nov 9 12:17 /home/kali/mycat
+
+Устанавливаем бит set-UID
+
+┌──(kali㉿kali)-[~]
+└─$ sudo chown root ~/mycat
+[sudo] password for kali:
+
+┌──(kali㉿kali)-[~]
+└─$ sudo chmod u+s ~/mycat
+
+┌──(kali㉿kali)-[~]
+└─$ ls -l ~/mycat
+-rwsr-xr-x 1 root kali 43936 Nov 9 12:17 /home/kali/mycat
+
+┌──(kali㉿kali)-[~]
+└─$ ~/mycat /etc/shadow
+root:$y$j9T$YrGJQV8Xf2Pbq3Pg0hIaH0$P9oo20EveEqtPY88DvYmcPrHwaJ19yP/KYOZw8n52WC:20766:0:99999:7:::
+daemon::19034:0:99999:7:::
+bin::19034:0:99999:7:::
+sys::19034:0:99999:7:::
+sync::19034:0:99999:7:::
+games::19034:0:99999:7:::
+man::19034:0:99999:7:::
+lp::19034:0:99999:7:::
+mail::19034:0:99999:7:::
+news::19034:0:99999:7:::
+uucp::19034:0:99999:7:::
+proxy::19034:0:99999:7:::
+www-data::19034:0:99999:7:::
+backup::19034:0:99999:7:::
+list::19034:0:99999:7:::
+irc::19034:0:99999:7:::
+gnats::19034:0:99999:7:::
+nobody::19034:0:99999:7:::
+systemd-network::19034:0:99999:7:::
+systemd-resolve::19034:0:99999:7:::
+_apt::19034:0:99999:7:::
+mysql:!:19034:0:99999:7:::
+tss::19034:0:99999:7:::
+strongswan::19034:0:99999:7:::
+systemd-timesync::19034:0:99999:7:::
+redsocks:!:19034:0:99999:7:::
+rwhod::19034:0:99999:7:::
+iodine::19034:0:99999:7:::
+messagebus::19034:0:99999:7:::
+miredo::19034:0:99999:7:::
+_rpc::19034:0:99999:7:::
+usbmux::19034:0:99999:7:::
+tcpdump::19034:0:99999:7:::
+rtkit::19034:0:99999:7:::
+sshd::19034:0:99999:7:::
+dnsmasq::19034:0:99999:7:::
+statd::19034:0:99999:7:::
+avahi::19034:0:99999:7:::
+nm-openvpn::19034:0:99999:7:::
+stunnel4:!:19034:0:99999:7:::
+nm-openconnect::19034:0:99999:7:::
+Debian-snmp:!:19034:0:99999:7:::
+speech-dispatcher:!:19034:0:99999:7:::
+sslh:!:19034:0:99999:7:::
+postgres::19034:0:99999:7:::
+pulse::19034:0:99999:7:::
+saned::19034:0:99999:7:::
+inetsim::19034:0:99999:7:::
+lightdm::19034:0:99999:7:::
+colord::19034:0:99999:7:::
+geoclue::19034:0:99999:7:::
+king-phisher:*:19034:0:99999:7:::
+kali:$y$j9T$mRKgw72c.XaWowy1Q1xrC/$nIYDQYi6xfLitgt9vIYSzdgNcK7T6XIsTdZVN8K28PB:19034:0:99999:7:::
+user1:$y$j9T$rfa0jVboyWvb9In3TnFWW/$DEuIAcIsVOnl0Hl.VSSvnxB1oKKUELemdEFdH.vCg41:20766:0:90:7:::
+
+Проверка stat user1
+
+─$ stat /home/user1
+File: /home/user1
+Size: 4096 Blocks: 8 IO Block: 4096 directory
+Device: 801h/2049d Inode: 2893111 Links: 4
+Access: (0755/drwxr-xr-x) Uid: ( 1234/ user1) Gid: ( 1234/ user1)
+Access: 2026-11-09 11:59:09.328865752 -0500
+Modify: 2026-11-09 05:22:49.678254803 -0500
+Change: 2026-11-09 05:22:49.678254803 -0500
+Birth: 2026-11-09 05:22:49.670250802 -0500
+
+Проверка утилит задания 3
+
+┌──(kali㉿kali)-[~]
+└─$ stat ~/mycat
+File: /home/kali/mycat
+Size: 43936 Blocks: 88 IO Block: 4096 regular file
+Device: 801h/2049d Inode: 2893133 Links: 1
+Access: (4755/-rwsr-xr-x) Uid: ( 0/ root) Gid: ( 1000/ kali)
+Access: 2026-11-09 12:20:37.075959553 -0500
+Modify: 2026-11-09 12:17:48.815959553 -0500
+Change: 2026-11-09 12:19:42.239959553 -0500
+Birth: 2026-11-09 12:17:48.815959553 -0500
+
+┌──(kali㉿kali)-[~]
+└─$ stat ~/mychown
+File: /home/kali/mychown
+Size: 72704 Blocks: 144 IO Block: 4096 regular file
+Device: 801h/2049d Inode: 2893134 Links: 1
+Access: (0755/-rwxr-xr-x) Uid: ( 1000/ kali) Gid: ( 1000/ kali)
+Access: 2026-11-09 12:51:14.073539382 -0500
+Modify: 2026-11-09 12:48:15.065539382 -0500
+Change: 2026-11-09 12:49:38.961539382 -0500
+Birth: 2026-11-09 12:48:15.065539382 -0500
