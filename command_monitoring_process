@@ -1,0 +1,4 @@
+┌──(root㉿kali)-[~]
+└─# ps -eo ruid,euid,pid,comm | awk '$1 != 0 && $2 == 0'
+1000 0 10683 su
+
